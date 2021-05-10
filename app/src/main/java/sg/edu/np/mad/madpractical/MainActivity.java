@@ -7,8 +7,6 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.Random;
-
 public class MainActivity extends AppCompatActivity {
 
     private User user;
@@ -28,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
         this.textViewName = findViewById(R.id.textViewName);
         this.textViewDescription = findViewById(R.id.textViewDescription);
-        this.buttonFollow = findViewById(R.id.buttonFollow);
+        this.buttonFollow = findViewById(R.id.btnFollow);
         this.buttonMessage = findViewById(R.id.buttonMessage);
 
         User dummyUser = new User("Ben", "Code. Create. Coordinate.",  1, false);

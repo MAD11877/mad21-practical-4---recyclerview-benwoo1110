@@ -1,12 +1,8 @@
 package sg.edu.np.mad.madpractical;
 
 import android.content.Context;
-import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 
-import androidx.test.espresso.NoMatchingViewException;
-import androidx.test.espresso.ViewAssertion;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
@@ -46,7 +42,7 @@ public class ExampleInstrumentedTest {
     @Test
     public void followClickTest() {
         // Context of the app under test.
-        onView(withId(R.id.buttonFollow))
+        onView(withId(R.id.btnFollow))
                 .check((view, noViewFoundException) -> {
                     String followText = ((Button) view).getText().toString().toLowerCase();
                     assertEquals("follow", followText);
