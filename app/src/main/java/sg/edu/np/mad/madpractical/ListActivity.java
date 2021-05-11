@@ -1,12 +1,14 @@
 package sg.edu.np.mad.madpractical;
 
+import android.os.Bundle;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.os.Bundle;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,5 +49,14 @@ public class ListActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(itemAnimator);
         recyclerView.addItemDecoration(divider);
+
+        new ItemTouchHelper(new SwipeToDeleteCallback() {
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                int targetPos = viewHolder.getAdapterPosition();
+                usersList.remove(targetPos);
+                adapter.notifyItemRemoved(targetPos);
+            }
+        }).attachToRecyclerView(recyclerView);
     }
 }
