@@ -13,15 +13,9 @@ import java.util.Random;
 
 public class ListActivity extends AppCompatActivity {
 
-    static List<User> usersList;
+    static List<User> usersList = new ArrayList<>();
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list);
-
-        usersList = new ArrayList<>();
-
+    static {
         for (int i = 0; i < 20; i++) {
             usersList.add(new User(
                     "Name" + randomInt(),
@@ -30,6 +24,16 @@ public class ListActivity extends AppCompatActivity {
                     randomInt() % 2 == 1
             ));
         }
+    }
+
+    private static int randomInt() {
+        return new Random().nextInt();
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_list);
 
         RecyclerView recyclerView = findViewById(R.id.rv);
 
@@ -40,9 +44,5 @@ public class ListActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.addItemDecoration(divider);
-    }
-
-    private int randomInt() {
-        return new Random().nextInt();
     }
 }
