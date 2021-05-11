@@ -10,7 +10,6 @@ import androidx.appcompat.app.AppCompatActivity;
 public class MainActivity extends AppCompatActivity {
 
     private User user;
-    private int random;
 
     private TextView textViewName;
     private TextView textViewDescription;
@@ -22,39 +21,47 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        this.random = getIntent().getIntExtra("id", 0);
 
         this.textViewName = findViewById(R.id.textViewName);
         this.textViewDescription = findViewById(R.id.textViewDescription);
         this.buttonFollow = findViewById(R.id.btnFollow);
         this.buttonMessage = findViewById(R.id.buttonMessage);
 
-        User dummyUser = new User("Ben", "Code. Create. Coordinate.",  1, false);
-        this.setUser(dummyUser);
+        int id = getIntent().getIntExtra("id", 0);
+        User targetUser = ListActivity.usersList.get(id);
+
+        this.setUser(targetUser);
         this.buttonFollow.setOnClickListener(v -> {
             this.user.setFollowed(!this.user.isFollowed());
-            this.updateUserFollowState();
+            this.updateFollowState();
+            this.toastUserFollowState();
         });
     }
 
     private void setUser(User user) {
         this.user = user;
         this.updateUserInfo();
-        this.updateUserFollowState();
+        this.updateFollowState();
     }
 
     private void updateUserInfo() {
-        this.textViewName.setText(user.getName() + " " + this.random);
+        this.textViewName.setText(user.getName());
         this.textViewDescription.setText(user.getDescription());
     }
 
-    private void updateUserFollowState() {
+    private void updateFollowState() {
+        if (this.user.isFollowed()) {
+            this.buttonFollow.setText(R.string.unfollow);
+        } else {
+            this.buttonFollow.setText(R.string.follow);
+        }
+    }
+
+    private void toastUserFollowState() {
         if (this.user.isFollowed()) {
             Toast.makeText(getApplicationContext(), "Followed", Toast.LENGTH_SHORT).show();
-            this.buttonFollow.setText(R.string.unfollow);
-            return;
+        } else {
+            Toast.makeText(getApplicationContext(), "Unfollowed", Toast.LENGTH_SHORT).show();
         }
-        Toast.makeText(getApplicationContext(), "Unfollowed", Toast.LENGTH_SHORT).show();
-        this.buttonFollow.setText(R.string.follow);
     }
 }

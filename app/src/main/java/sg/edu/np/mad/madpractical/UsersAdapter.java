@@ -35,14 +35,13 @@ public class UsersAdapter extends RecyclerView.Adapter<UserViewHolder> {
         User targetUser = this.users.get(position);
         holder.name.setText(targetUser.name);
         holder.description.setText(targetUser.description);
-
         holder.image.setOnClickListener(v -> new AlertDialog.Builder(context)
                 .setTitle("Profile")
                 .setMessage(targetUser.name)
                 .setNegativeButton("close", null)
                 .setPositiveButton("view", (dialog, which) -> {
                     Intent intent = new Intent(context, MainActivity.class);
-                    intent.putExtra("id", new Random().nextInt());
+                    intent.putExtra("id", position);
                     context.startActivity(intent);
                 })
                 .show());
