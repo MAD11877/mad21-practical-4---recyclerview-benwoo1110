@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class UserViewHolder extends RecyclerView.ViewHolder {
 
+    int index = -1;
     ImageView image;
     TextView name;
     TextView description;
