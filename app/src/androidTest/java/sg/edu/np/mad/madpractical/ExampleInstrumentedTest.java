@@ -38,19 +38,4 @@ public class ExampleInstrumentedTest {
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
         assertEquals("sg.edu.np.mad.madpractical", appContext.getPackageName());
     }
-
-    @Test
-    public void followClickTest() {
-        // Context of the app under test.
-        onView(withId(R.id.btnFollow))
-                .check((view, noViewFoundException) -> {
-                    String followText = ((Button) view).getText().toString().toLowerCase();
-                    assertEquals("follow", followText);
-                })
-                .perform(click())
-                .check((view, noViewFoundException) -> {
-                    String followText = ((Button) view).getText().toString().toLowerCase();
-                    assertEquals("unfollow", followText);
-                });
-    }
 }
